@@ -5,9 +5,30 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 **********************************
+*** DHS countries: Recode VIII ****
+**********************************
+#delimit ;
+global DHScountries_Recode_VIII
+"
+Mauritania2019
+Angola2020
+BurkinaFaso2020
+Cambodia2020
+Coted'Ivoire2020
+Ethiopia2019
+Gambia2019
+Guatemala2020
+Madagascar2020
+Mozambique2020
+Myanmar2020
+Rwanda2019
+Zimbabwe2020
+";
+#delimit cr
+
+**********************************
 *** DHS countries: Recode VII ****
 **********************************
-
 #delimit ;
 global DHScountries_Recode_VII
 "

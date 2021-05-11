@@ -22,7 +22,7 @@ macro drop _all
 global root "/Users/xianzhang/Dropbox/DHS"
 
 * Define path for data sources
-global SOURCE "/Volumes/alan/DHS/RAW DATA/Recode VII"
+global SOURCE "/Volumes/alan/DHS/RAW DATA/Recode VIII"
 
 * Define path for output data
 global OUT "${root}/STATA/DATA/SC/FINAL"
@@ -31,15 +31,14 @@ global OUT "${root}/STATA/DATA/SC/FINAL"
 global INTER "${root}/STATA/DATA/SC/INTER"
 
 * Define path for do-files
-global DO "${root}/STATA/DO/SC/DHS/Recode VII"
+global DO "${root}/STATA/DO/SC/DHS/Recode-VIII"
 
 * Define the country names (in globals) in by Recode
     
 do "${DO}/0_GLOBAL.do"
 	
-// global DHScountries_Recode_VII "Jordan2017"  //run with Afghanistan2015 as test.$DHScountries_Recode_VII
-//$DHScountries_Recode_VII
-foreach name in  $DHScountries_Recode_VII{	
+//$DHScountries_Recode_VIII
+foreach name in  $DHScountries_Recode_VIII{	
 clear
 tempfile birth ind men hm hiv hh iso
 
@@ -102,20 +101,6 @@ gen name = "`name'"
 keep v001 v002 v003 w_* hm_*
 rename (v001 v002 v003) (hv001 hv002 hvidx)
 save `ind' 
-/*
-******************************
-*****domains using men data***
-******************************
-use "${SOURCE}/DHS-`name'/DHS-`name'men.dta", clear
-gen name = "`name'"
-
-    *hm_dob	date of birth (cmc)
-    gen hm_dob = mv011  
-
-keep mv001 mv002 mv003 hm_*
-rename (mv001 mv002 mv003) (hv001 hv002 hvidx)
-save `men'
-*/
 
 ************************************
 *****domains using hm level data****
