@@ -21,7 +21,9 @@
 	gen w_CPR=(v313==3)
     replace w_CPR=. if v313==.
     replace w_CPR=. if v502!=1 
-	
+	if inlist(name,"Ethiopia2019") { // lack provider for child pnc 
+		replace w_CPR=.
+	}	
 	*w_unmet_fp 15-49y married or in union with unmet need for family planning (1/0)
 	*w_need_fp 15-49y married or in union with need for family planning (1/0)
 	*w_metany_fp 15-49y married or in union with need for family planning using modern contraceptives (1/0)

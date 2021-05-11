@@ -55,11 +55,11 @@
 			replace c_bcg = 0 if h1 == 1
 			replace c_bcg = 1 if (h2 ==1 | h2 ==2 | h2 ==3)  
 		}	
-/*
+
 		gen cpolio0  = .  
 		replace cpolio0  = 1 if (h0 ==1 | h0 ==2 | h0 ==3)  
 		replace cpolio0  = 0 if h0 ==0  
-*/
+
 *c_polio1	child			Child received polio1/OPV1 vaccination
 		gen c_polio1  = .  
 		if ~inlist(name,"Albania2017") {

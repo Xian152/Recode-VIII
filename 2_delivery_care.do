@@ -23,12 +23,6 @@ gen country = regexs(1) if regexm(country_year, "([a-zA-Z]+)")
 	replace `var' = . if !inlist(`var',0,1)
 	
 	 }
-	if inlist(name, "Senegal2017") {
-		replace m3h = .
-	}
-	if inlist(name,"Nepal2016") {
-		replace m3d = .  // Nepal doesn't include health assistant in the report.
-	}
 	/* do consider as skilled if contain words in the first group but don't contain any words in the second group */
 
 	egen sba_skill = rowtotal(m3a-m3m),mi
@@ -84,13 +78,17 @@ gen country = regexs(1) if regexm(country_year, "([a-zA-Z]+)")
 	*c_caesarean: Last birth in last 2 years delivered through caesarean                    
 	clonevar c_caesarean = m17
 	replace c_caesarean = . if m17 == 8
+	replace c_caesarean = . if m15 == .
 	
     *c_sba_eff1: Effective delivery care (baby delivered in facility, by skilled provider, mother and child stay in facility for min. 24h, breastfeeding initiated in first 1h after birth)
-  
-	gen stay = 0 if m15 != .
-	replace stay = 1 if stay == 0 & (inrange(m61,124,198)|inrange(m61,201,298)|inrange(m61,301,398))
-	replace stay = . if inlist(m61,.,299,998)  & !inlist(m15,11,12,96) // filter question, based on m15
-	
+  	if !inlist(name,"Ethiopia2019"){
+		gen stay = 0 if m15 != .
+		replace stay = 1 if stay == 0 & (inrange(m61,124,198)|inrange(m61,201,298)|inrange(m61,301,398))
+		replace stay = . if inlist(m61,.,299,998)  & !inlist(m15,11,12,96) // filter question, based on m15
+	}
+	if inlist(name,"Ethiopia2019"){
+		gen stay = .
+	}	
 	gen c_sba_eff1 = (c_facdel == 1 & c_sba == 1 & stay == 1 & c_earlybreast == 1) 
 	replace c_sba_eff1 = . if c_facdel == . | c_sba == . | stay == . | c_earlybreast == . 
 		

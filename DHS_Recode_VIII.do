@@ -38,7 +38,7 @@ global DO "${root}/STATA/DO/SC/DHS/Recode-VIII"
 do "${DO}/0_GLOBAL.do"
 	
 //$DHScountries_Recode_VIII
-foreach name in  $DHScountries_Recode_VIII{	
+foreach name in Ethiopia2019{	
 clear
 tempfile birth ind men hm hiv hh iso
 
